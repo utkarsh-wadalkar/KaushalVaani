@@ -1,1 +1,0 @@
-"""Vector retrieval and reranking."""
