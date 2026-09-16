@@ -2,29 +2,39 @@
 .env
 .env.*
 !.env.example
+!.env.*.example
 
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.eggs/
+*.egg-info/
+build/
+dist/
 .venv/
 venv/
 ENV/
 
-# Node
+# Node / React / Vite
 node_modules/
+.vite/
+coverage/
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# Frontend build
-dist/
-build/
-.next/
 
 # IDE
 .vscode/*
@@ -35,35 +45,53 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Logs
 *.log
 logs/
+*.pid
 
-# Data
-05-data/raw/*
-05-data/processed/*
-05-data/chunks/*
-05-data/indexes/*
+# Generated data and indexes
+05-data/raw/**
+05-data/processed/**
+05-data/chunks/**
+05-data/indexes/**
+!05-data/raw/.gitkeep
+!05-data/processed/.gitkeep
+!05-data/chunks/.gitkeep
+!05-data/indexes/.gitkeep
 
 # Evaluation generated results
-06-evaluation/results/*
+06-evaluation/results/**
+!06-evaluation/results/.gitkeep
+
+# Local model and vector database caches
+.cache/
+.huggingface/
+.qdrant/
+qdrant_storage/
+
+# Web research cache
+.firecrawl/
 
 # Temporary files
+tmp/
+.tmp/
 *.tmp
 *.temp
 notes/
 .claude/
+*.bak
+*.swp
 
 # Secrets / credentials
 *.pem
 *.key
+*.p12
+*.pfx
 credentials.json
 service-account*.json
 
-# Docker
-.docker/
 
-# Coverage
-.coverage
-htmlcov/
+notes/
