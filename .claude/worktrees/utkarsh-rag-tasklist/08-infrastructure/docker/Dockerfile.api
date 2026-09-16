@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/03-ai-rag-engine:/app/06-evaluation:/app/01-backend-api
+
+WORKDIR /app
+COPY pyproject.toml ./
+COPY 00-contracts ./00-contracts
+COPY 01-backend-api ./01-backend-api
+COPY 03-ai-rag-engine ./03-ai-rag-engine
+COPY 04-external-services ./04-external-services
+COPY 05-data ./05-data
+COPY 06-evaluation ./06-evaluation
+COPY 07-scripts ./07-scripts
+
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir .
+
+RUN useradd --create-home --uid 10001 echoquery \
+    && chown -R echoquery:echoquery /app
+USER echoquery
+
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]

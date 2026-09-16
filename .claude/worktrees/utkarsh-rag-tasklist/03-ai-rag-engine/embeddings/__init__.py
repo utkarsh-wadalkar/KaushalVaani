@@ -1,0 +1,1 @@
+"""Embedding contracts and providers."""

@@ -1,0 +1,40 @@
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: 08-infrastructure/docker/Dockerfile.api
+    env_file:
+      - ../../.env.example
+    environment:
+      APP_ENV: development
+      INDEX_SNAPSHOT: /app/data/indexes/index.json
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../03-ai-rag-engine:/app/03-ai-rag-engine
+      - ../../01-backend-api:/app/01-backend-api
+      - ../../05-data:/app/data
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    networks: [echoquery]
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - qdrant_dev_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:6333/readyz || exit 1"]
+      interval: 10s
+      timeout: 4s
+      retries: 10
+    networks: [echoquery]
+
+networks:
+  echoquery:
+    driver: bridge
+
+volumes:
+  qdrant_dev_data:
