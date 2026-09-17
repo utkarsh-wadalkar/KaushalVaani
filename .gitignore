@@ -57,10 +57,12 @@ logs/
 05-data/processed/**
 05-data/chunks/**
 05-data/indexes/**
-!05-data/raw/.gitkeep
-!05-data/processed/.gitkeep
-!05-data/chunks/.gitkeep
-!05-data/indexes/.gitkeep
+
+# Keep directory documentation
+!05-data/raw/README.md
+!05-data/processed/README.md
+!05-data/chunks/README.md
+!05-data/indexes/README.md
 
 # Evaluation generated results
 06-evaluation/results/**
@@ -92,5 +94,4 @@ notes/
 *.pfx
 credentials.json
 service-account*.json
-
 *.context/
