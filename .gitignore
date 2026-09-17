@@ -93,5 +93,4 @@ notes/
 credentials.json
 service-account*.json
 
-
-notes/
+*.context/
